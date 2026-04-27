@@ -83,13 +83,15 @@ class Program
             totalFacturadoDia += totalAPagar;
 
             // Reporte por cliente
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\n------------------------------------");
             Console.WriteLine($"Subtotal:       C${subtotalCliente:N2}");
             Console.WriteLine($"Descuento:      C${descuento:N2}");
             Console.WriteLine($"Total a Pagar:  C${totalAPagar:N2}");
             Console.WriteLine($"Productos:      {productosDeEsteCliente}");
             Console.WriteLine("------------------------------------\n");
-
+            Console.ResetColor();
+            
             Console.Write("¿Hay más clientes en la fila? (s/n): ");
             if (Console.ReadLine()!.ToLower() != "s") terminarDia = true;
         }
