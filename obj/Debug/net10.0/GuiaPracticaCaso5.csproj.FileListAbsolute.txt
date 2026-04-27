@@ -1,0 +1,14 @@
+C:\Users\ruizr\GuiaPracticaCaso5\bin\Debug\net10.0\GuiaPracticaCaso5.exe
+C:\Users\ruizr\GuiaPracticaCaso5\bin\Debug\net10.0\GuiaPracticaCaso5.deps.json
+C:\Users\ruizr\GuiaPracticaCaso5\bin\Debug\net10.0\GuiaPracticaCaso5.runtimeconfig.json
+C:\Users\ruizr\GuiaPracticaCaso5\bin\Debug\net10.0\GuiaPracticaCaso5.dll
+C:\Users\ruizr\GuiaPracticaCaso5\bin\Debug\net10.0\GuiaPracticaCaso5.pdb
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\GuiaPracticaCaso5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\GuiaPracticaCaso5.AssemblyInfoInputs.cache
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\GuiaPracticaCaso5.AssemblyInfo.cs
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\GuiaPracticaCaso5.csproj.CoreCompileInputs.cache
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\GuiaPracticaCaso5.dll
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\refint\GuiaPracticaCaso5.dll
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\GuiaPracticaCaso5.pdb
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\GuiaPracticaCaso5.genruntimeconfig.cache
+C:\Users\ruizr\GuiaPracticaCaso5\obj\Debug\net10.0\ref\GuiaPracticaCaso5.dll
