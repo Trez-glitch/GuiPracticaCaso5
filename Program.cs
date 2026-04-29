@@ -17,12 +17,12 @@ Además, el sistema deberá calcular:
 • Promedio de compra por cliente. */
 
 using System;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main()
     {
-        // Variables globales (Acumuladores y Contadores del día)
         decimal totalFacturadoDia = 0;
         int totalClientesAtendidos = 0;
         decimal precioProductoMasCaro = 0;
@@ -32,76 +32,119 @@ class Program
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("========================================");
-        Console.WriteLine("   SIMULADOR DE CAJA - SUPERMERCADO     ");
+        Console.WriteLine("   SIMULADOR DE CAJA - SUPERMERCADO");
         Console.WriteLine("========================================\n");
         Console.ResetColor();
 
         while (!terminarDia)
         {
-            totalClientesAtendidos++;
             decimal subtotalCliente = 0;
             int productosDeEsteCliente = 0;
             bool masProductos = true;
 
-            Console.WriteLine($"\n--- CLIENTE #{totalClientesAtendidos} ---");
+            List<string> nombres = new List<string>();
+            List<decimal> precios = new List<decimal>();
+            List<int> cantidades = new List<int>();
+            List<decimal> subtotales = new List<decimal>();
 
-            // Ciclo para registrar productos por cliente
+            Console.WriteLine($"--- CLIENTE #{totalClientesAtendidos + 1} ---");
+
             while (masProductos)
             {
                 Console.Write("Nombre del producto: ");
                 string nombreProd = Console.ReadLine()!;
 
+                decimal precio;
                 Console.Write("Precio (C$): ");
-                decimal precio = decimal.Parse(Console.ReadLine()!);
+                while (!decimal.TryParse(Console.ReadLine(), out precio) || precio <= 0)
+                {
+                    Console.Write("Ingrese un precio válido mayor que 0: ");
+                }
 
+                int cantidad;
                 Console.Write("Cantidad: ");
-                int cantidad = int.Parse(Console.ReadLine()!);
+                while (!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0)
+                {
+                    Console.Write("Ingrese una cantidad válida mayor que 0: ");
+                }
 
-                // Lógica para encontrar el producto más caro del día
+                decimal subtotalProducto = precio * cantidad;
+
+                nombres.Add(nombreProd);
+                precios.Add(precio);
+                cantidades.Add(cantidad);
+                subtotales.Add(subtotalProducto);
+
+                subtotalCliente += subtotalProducto;
+                productosDeEsteCliente += cantidad;
+
                 if (precio > precioProductoMasCaro)
                 {
                     precioProductoMasCaro = precio;
                     nombreProductoMasCaro = nombreProd;
                 }
 
-                // Acumuladores y contadores por cliente
-                subtotalCliente += (precio * cantidad);
-                productosDeEsteCliente += cantidad;
-
-                Console.Write("\n¿Desea agregar otro producto para este cliente? (s/n): ");
-                if (Console.ReadLine()!.ToLower() != "s") masProductos = false;
+                Console.Write("¿Desea agregar otro producto para este cliente? (s/n): ");
+                if (Console.ReadLine()!.ToLower() != "s")
+                {
+                    masProductos = false;
+                }
             }
 
-            // Aplicación de condicionales para descuentos
+            totalClientesAtendidos++;
+
             decimal descuento = 0;
+            string porcentajeDescuento = "0%";
+
             if (subtotalCliente > 3000)
-                descuento = subtotalCliente * 0.10m; // 10%
+            {
+                descuento = subtotalCliente * 0.10m;
+                porcentajeDescuento = "10%";
+            }
             else if (subtotalCliente > 1000)
-                descuento = subtotalCliente * 0.05m; // 5%
+            {
+                descuento = subtotalCliente * 0.05m;
+                porcentajeDescuento = "5%";
+            }
 
             decimal totalAPagar = subtotalCliente - descuento;
             totalFacturadoDia += totalAPagar;
 
-            // Reporte por cliente
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("\n------------------------------------");
-            Console.WriteLine($"Subtotal:       C${subtotalCliente:N2}");
-            Console.WriteLine($"Descuento:      C${descuento:N2}");
-            Console.WriteLine($"Total a Pagar:  C${totalAPagar:N2}");
-            Console.WriteLine($"Productos:      {productosDeEsteCliente}");
-            Console.WriteLine("------------------------------------\n");
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\n------------- FACTURA DEL CLIENTE -------------");
             
+
+            Console.WriteLine("Producto\tCantidad\tPrecio\t\tSubtotal");
+
+            for (int i = 0; i < nombres.Count; i++)
+            {
+                Console.WriteLine($"{nombres[i]}\t\t{cantidades[i]}\t\tC${precios[i]:N2}\tC${subtotales[i]:N2}");
+            }
+            Console.ResetColor();
+
+            
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("-----------------------------------------------");
+            Console.WriteLine($"Subtotal:             C${subtotalCliente:N2}");
+            Console.WriteLine($"Descuento aplicado:   {porcentajeDescuento}");
+            Console.WriteLine($"Descuento:            C${descuento:N2}");
+            Console.WriteLine($"Total a pagar:        C${totalAPagar:N2}");
+            Console.WriteLine($"Productos comprados:  {productosDeEsteCliente}");
+            Console.WriteLine("-----------------------------------------------\n");
+            Console.ResetColor();
+
             Console.Write("¿Hay más clientes en la fila? (s/n): ");
-            if (Console.ReadLine()!.ToLower() != "s") terminarDia = true;
+            if (Console.ReadLine()!.ToLower() != "s")
+            {
+                terminarDia = true;
+            }
         }
 
-        // Cálculos finales y cierre
         decimal promedioCompra = totalClientesAtendidos > 0 ? totalFacturadoDia / totalClientesAtendidos : 0;
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("\n========================================");
-        Console.WriteLine("        CIERRE DE CAJA FINAL            ");
+        Console.WriteLine("        CIERRE DE CAJA FINAL");
         Console.WriteLine("========================================");
         Console.WriteLine($"Clientes atendidos:      {totalClientesAtendidos}");
         Console.WriteLine($"Total facturado:         C${totalFacturadoDia:N2}");
@@ -109,7 +152,7 @@ class Program
         Console.WriteLine($"Producto más caro:       {nombreProductoMasCaro} (C${precioProductoMasCaro:N2})");
         Console.WriteLine("========================================");
         Console.ResetColor();
-        
+
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("\nPresione cualquier tecla para salir...");
         Console.ReadKey();
