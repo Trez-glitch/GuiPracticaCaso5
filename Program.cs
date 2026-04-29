@@ -65,10 +65,10 @@ class Program
                 Console.Write("Cantidad: ");
                 while (!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0)
                 {
-                    Console.Write("Ingrese una cantidad válida mayor que 0: ");
+                    Console.Write("Ingrese un numero entero mayor a 0: ");
                 }
 
-                decimal subtotalProducto = precio * cantidad;
+                decimal subtotalProducto = precio * cantidad;   
 
                 nombres.Add(nombreProd);
                 precios.Add(precio);
