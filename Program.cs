@@ -43,7 +43,7 @@ class Program
             int productosDeEsteCliente = 0;
             bool masProductos = true;
 
-            Console.WriteLine($"--- CLIENTE #{totalClientesAtendidos} ---");
+            Console.WriteLine($"\n--- CLIENTE #{totalClientesAtendidos} ---");
 
             // Ciclo para registrar productos por cliente
             while (masProductos)
@@ -68,7 +68,7 @@ class Program
                 subtotalCliente += (precio * cantidad);
                 productosDeEsteCliente += cantidad;
 
-                Console.Write("¿Desea agregar otro producto para este cliente? (s/n): ");
+                Console.Write("\n¿Desea agregar otro producto para este cliente? (s/n): ");
                 if (Console.ReadLine()!.ToLower() != "s") masProductos = false;
             }
 
